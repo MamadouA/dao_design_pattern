@@ -1,17 +1,18 @@
 package org.mnjaay.testeur;
 
 import org.mnjaay.dao.IDao;
-import org.mnjaay.dao.MysqlUserDaoImpl;
+import org.mnjaay.dao.impl.HibernateUserDaoImpl;
+import org.mnjaay.dao.impl.MysqlUserDaoImpl;
 import org.mnjaay.exceptions.DAOException;
 import org.mnjaay.model.User;
 
 import java.util.List;
 
-public class JDBCTesteur {
+public class Tester {
     IDao<User> userDao;
 
-    public JDBCTesteur() {
-        userDao = new MysqlUserDaoImpl();
+    public Tester() {
+        userDao = new HibernateUserDaoImpl();
     }
 
     public void createUser(String login, String password) {

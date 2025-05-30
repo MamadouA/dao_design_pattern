@@ -1,18 +1,18 @@
-package org.mnjaay;
+package org.mnjaay.runtime;
 
 import org.mnjaay.model.User;
-import org.mnjaay.testeur.JDBCTesteur;
+import org.mnjaay.testeur.Tester;
 
 import java.util.List;
 
-public class JDBCTesterRuntime {
+public class Main {
     public static void main(String[] args) {
-        JDBCTesteur jdbcTesteur = new JDBCTesteur();
+        Tester hibernateTester = new Tester();
 
-//        jdbcTesteur.createUser("admin", "passer");
+//        hibernateTester.createUser("admin", "passer");
 //        jdbcTesteur.deleteUser(1);
 
-//        User user = jdbcTesteur.read(2);
+//        User user = jdbcTsteur.read(2);
 //
 //        // display and update
 //        if(user != null) {
@@ -24,7 +24,7 @@ public class JDBCTesterRuntime {
 //            jdbcTesteur.updateUser(user);
 //        }
 
-        displayUsers(jdbcTesteur.listUsers());
+        displayUsers(hibernateTester.listUsers());
     }
 
     public static void displayUsers(List<User> users) {

@@ -1,5 +1,6 @@
-package org.mnjaay.dao;
+package org.mnjaay.dao.impl;
 
+import org.mnjaay.dao.IDao;
 import org.mnjaay.database.DBManger;
 import org.mnjaay.exceptions.DAOException;
 import org.mnjaay.model.User;
@@ -10,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MysqlUserDaoImpl implements IDao<User>{
+public class MysqlUserDaoImpl implements IDao<User> {
 
     @Override
     public void create(User entity) throws DAOException {

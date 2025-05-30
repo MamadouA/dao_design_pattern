@@ -20,15 +20,13 @@ public class HibernateConnection {
 
         Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
 
-// Creating Hibernate Session Factory Instance factory = meta.getSessionFactoryBuilder().build();
-// Creating The Hibernate's Session Object session = factory.openSession();
-
+        // Creating Hibernate Session Factory Instance
+        factory = meta.getSessionFactoryBuilder().build();
+        // Creating The Hibernate's Session Object
+        session = factory.openSession();
     }
 
     public Session getSession() {
-        if (session == null) {
-            new HibernateConnection();
-        }
         return session;
     }
 

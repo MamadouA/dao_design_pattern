@@ -1,7 +1,8 @@
-package org.mnjaay.dao;
+package org.mnjaay.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.mnjaay.dao.IDao;
 import org.mnjaay.database.HibernateConnection;
 import org.mnjaay.exceptions.DAOException;
 import org.mnjaay.model.User;
@@ -36,7 +37,7 @@ public class HibernateUserDaoImpl implements IDao<User> {
     public List<User> list() throws DAOException {
         try {
             Session session = HibernateConnection.getInstance().getSession();
-            return session.createQuery("select u " + " from T_Users u", User.class).getResultList();
+            return session.createQuery("select u " + " from t_users u", User.class).getResultList();
         } catch (Exception e) {
             throw new DAOException("ERROR : " + e.getClass() + ":" + e.getMessage());
         }

@@ -1,5 +1,6 @@
-package org.mnjaay.dao;
+package org.mnjaay.dao.impl;
 
+import org.mnjaay.dao.IDao;
 import org.mnjaay.exceptions.DAOException;
 import org.mnjaay.model.User;
 import org.mnjaay.model.Users;
@@ -8,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class ObjectFileUserDaoImpl implements  IDao<User> {
+public class ObjectFileUserDaoImpl implements IDao<User> {
     private final Serializer serializer;
 
     public ObjectFileUserDaoImpl() {
