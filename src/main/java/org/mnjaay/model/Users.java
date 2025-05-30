@@ -13,6 +13,16 @@ public class Users implements Serializable {
         users = new ArrayList<>();
     }
 
+    public void addUser(User user) {
+        this.users.add(user);
+    }
+
+    public void removeUser(int id) {
+        setUsers(
+                this.users.stream().filter(u -> u.getId() != id).toList()
+        );
+    }
+
     public List<User> getUsers() {
         return users;
     }

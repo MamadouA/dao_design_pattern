@@ -10,7 +10,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         JDBCTesteur jdbcTesteur = new JDBCTesteur();
-        Users users = new Users();
+        Users usersList = new Users();
 //
 //          jdbcTesteur.createUser("admin", "passer");
 //         jdbcTesteur.createUser("mnjaay", "mamadou");
@@ -28,18 +28,23 @@ public class Main {
 //            jdbcTesteur.updateUser(user);
 //        }
 //
-         users.setUsers(jdbcTesteur.listUsers());
+        usersList.setUsers(jdbcTesteur.listUsers());
 
-        displayUsers(users.getUsers());
+        //displayUsers(usersList.getUsers());
 
         // -
         ObjectFileTesteur objectFileTesteur = new ObjectFileTesteur();
 
-        //objectFileTesteur.createUsers(users);
+//  ok      objectFileTesteur.createUsers(new User("alpha", "passer"));
 
-        List<Users> usersList = objectFileTesteur.listUsers();
+//
+//        User user = objectFileTesteur.readUser(6);
+//        if(user != null)
+//            System.out.println("login: " + user.getLogin() + " Password: " + user.getPassword());
 
-        displayUsers(usersList.getFirst().getUsers());
+//        objectFileTesteur.deleteUser(0);
+
+        displayUsers(objectFileTesteur.listerUsers());
     }
 
 
