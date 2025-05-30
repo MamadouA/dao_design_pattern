@@ -14,7 +14,8 @@ public class ObjectFileTesteur {
         userDao = new ObjectFileUserDaoImpl();
     }
 
-    public void createUser(User user) {
+    public void createUser(String login, String password) {
+        User user = new User(login, password);
         try {
             userDao.create(user);
         } catch (DAOException e) {

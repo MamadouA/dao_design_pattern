@@ -9,14 +9,16 @@ public class ObjectFileTesterRuntime {
     public static void main(String[] args) {
         ObjectFileTesteur objectFileTesteur = new ObjectFileTesteur();
 
-//        objectFileTesteur.createUser(new User("alpha", "passer"));
+        objectFileTesteur.createUser("Ibrahima", "passer@123");
 //
 //
 //        User user = objectFileTesteur.readUser(6);
 //        if(user != null)
 //            System.out.println("login: " + user.getLogin() + " Password: " + user.getPassword());
 //
-//        objectFileTesteur.deleteUser(0);
+
+//        System.out.println("Deleting user 1");
+//         objectFileTesteur.deleteUser(1);
 
         displayUsers(objectFileTesteur.listerUsers());
     }

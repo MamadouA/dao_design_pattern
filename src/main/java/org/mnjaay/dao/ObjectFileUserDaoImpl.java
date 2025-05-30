@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ObjectFileUserDaoImpl implements  IDao<User> {
-    private final String usersFile = "users.ser";
     private final Serializer serializer;
 
     public ObjectFileUserDaoImpl() {
@@ -20,6 +19,7 @@ public class ObjectFileUserDaoImpl implements  IDao<User> {
     public void create(User entity) throws DAOException {
         try {
             Users users = serializer.deserializeUsers();
+            entity.setId(users.getUsers().size() + 1);
             users.add(entity);
             serializer.serializeUsers(users);
 
@@ -54,7 +54,6 @@ public class ObjectFileUserDaoImpl implements  IDao<User> {
     public List<User> list() throws DAOException {
         try {
             Users users = serializer.deserializeUsers();
-
             return users.getUsers();
         } catch (IOException e) {
             System.out.println("An error has occurred while reading the users: " + e.getMessage());

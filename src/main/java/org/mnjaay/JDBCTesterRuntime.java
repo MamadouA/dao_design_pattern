@@ -10,7 +10,6 @@ public class JDBCTesterRuntime {
         JDBCTesteur jdbcTesteur = new JDBCTesteur();
 
 //        jdbcTesteur.createUser("admin", "passer");
-//        jdbcTesteur.createUser("mnjaay", "mamadou");
 //        jdbcTesteur.deleteUser(1);
 
 //        User user = jdbcTesteur.read(2);
