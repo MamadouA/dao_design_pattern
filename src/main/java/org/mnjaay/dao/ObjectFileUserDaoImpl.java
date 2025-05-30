@@ -3,26 +3,26 @@ package org.mnjaay.dao;
 import org.mnjaay.exceptions.DAOException;
 import org.mnjaay.model.User;
 import org.mnjaay.model.Users;
-import org.mnjaay.utils.SerializableManager;
-
+import org.mnjaay.utils.Serializer;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ObjectFileUserDaoImpl implements  IDao<User> {
-    private final SerializableManager serializableManager;
+    private final String usersFile = "users.ser";
+    private final Serializer serializer;
 
     public ObjectFileUserDaoImpl() {
-        serializableManager = new SerializableManager();
+        serializer = new Serializer();
     }
 
     @Override
     public void create(User entity) throws DAOException {
         try {
-            Users users = serializableManager.deserializeUsersList("users.ser");
+            Users users = serializer.deserializeUsers();
+            users.add(entity);
+            serializer.serializeUsers(users);
 
-            users.addUser(entity);
-            serializableManager.serializeUsersList("users.ser", users);
         } catch (IOException e) {
             System.out.println("An error has occurred while reading the users: " + e.getMessage());
         } catch (ClassNotFoundException e) {
@@ -34,7 +34,7 @@ public class ObjectFileUserDaoImpl implements  IDao<User> {
     public User read(int id) throws DAOException {
         User user = null;
         try {
-            Users users = serializableManager.deserializeUsersList("users.ser");
+            Users users = serializer.deserializeUsers();
 
             user = users.getUsers().stream().filter(u -> u.getId() == id).toList().getFirst();
 
@@ -53,7 +53,7 @@ public class ObjectFileUserDaoImpl implements  IDao<User> {
     @Override
     public List<User> list() throws DAOException {
         try {
-            Users users = serializableManager.deserializeUsersList("users.ser");
+            Users users = serializer.deserializeUsers();
 
             return users.getUsers();
         } catch (IOException e) {
@@ -67,17 +67,27 @@ public class ObjectFileUserDaoImpl implements  IDao<User> {
 
     @Override
     public void update(User entity) throws DAOException {
-
+//        try {
+//            Users users = serializableManager.deserializeUsersList(usersFile);
+//
+//            // TODO
+//
+//            serializableManager.serializeUsersList(usersFile, users);
+//        } catch (IOException e) {
+//            System.out.println("An error has occurred while reading the users: " + e.getMessage());
+//        } catch (ClassNotFoundException e) {
+//            System.out.println("Users class not found");
+//        }
     }
 
     @Override
     public void delete(int id) throws DAOException {
         try {
-            Users users = serializableManager.deserializeUsersList("users.ser");
+            Users users = serializer.deserializeUsers();
 
-            users.removeUser(id);
+            users.remove(id);
 
-            serializableManager.serializeUsersList("users.ser", users);
+            serializer.serializeUsers(users);
         } catch (IOException e) {
             System.out.println("An error has occurred while reading the users: " + e.getMessage());
         } catch (ClassNotFoundException e) {
