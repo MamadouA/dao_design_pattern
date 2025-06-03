@@ -1,9 +1,9 @@
 package org.mnjaay.dao.impl;
 
 import org.mnjaay.dao.IDao;
-import org.mnjaay.database.DBManger;
+import org.mnjaay.db.DBManger;
 import org.mnjaay.exceptions.DAOException;
-import org.mnjaay.model.User;
+import org.mnjaay.entities.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

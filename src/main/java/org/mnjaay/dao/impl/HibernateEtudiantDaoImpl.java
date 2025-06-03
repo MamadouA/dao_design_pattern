@@ -4,19 +4,19 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.mnjaay.dao.IDao;
 import org.mnjaay.db.HibernateConnection;
+import org.mnjaay.entities.Etudiant;
 import org.mnjaay.exceptions.DAOException;
-import org.mnjaay.entities.User;
 
 import java.util.List;
 
-public class HibernateUserDaoImpl implements IDao<User> {
+public class HibernateEtudiantDaoImpl implements IDao<Etudiant> {
 
     @Override
-    public void create(User user) throws DAOException {
+    public void create(Etudiant etudiant) throws DAOException {
         try {
             Session session = HibernateConnection.getInstance().getSession();
             Transaction transaction = session.beginTransaction();
-            session.persist(user);
+            session.persist(etudiant);
             transaction.commit();
         } catch (Exception e) {
             throw new DAOException("ERROR : " + e.getClass() + " : " + e.getMessage());
@@ -24,27 +24,27 @@ public class HibernateUserDaoImpl implements IDao<User> {
     }
 
     @Override
-    public User read(int id) throws DAOException {
+    public Etudiant read(int id) throws DAOException {
         try {
             Session session = HibernateConnection.getInstance().getSession();
-            return session.find(User.class, id);
+            return session.find(Etudiant.class, id);
         } catch (Exception e) {
             throw new DAOException("ERROR : " + e.getClass() + ":" + e.getMessage());
         }
     }
 
     @Override
-    public List<User> list() throws DAOException {
+    public List<Etudiant> list() throws DAOException {
         try {
             Session session = HibernateConnection.getInstance().getSession();
-            return session.createQuery("select u " + " from t_users u", User.class).getResultList();
+            return session.createQuery("select u " + " from t_etudiants u", Etudiant.class).getResultList();
         } catch (Exception e) {
             throw new DAOException("ERROR : " + e.getClass() + ":" + e.getMessage());
         }
     }
 
     @Override
-    public void update(User entity) throws DAOException {
+    public void update(Etudiant entity) throws DAOException {
         try {
             Session session = HibernateConnection.getInstance().getSession();
             Transaction transaction = session.beginTransaction();
@@ -61,9 +61,9 @@ public class HibernateUserDaoImpl implements IDao<User> {
         try {
             Session session = HibernateConnection.getInstance().getSession();
             Transaction transaction = session.beginTransaction();
-            User user = read(id);
-            if (user != null) {
-                session.remove(user);
+            Etudiant etudiant = read(id);
+            if (etudiant != null) {
+                session.remove(etudiant);
             }
 
             transaction.commit();

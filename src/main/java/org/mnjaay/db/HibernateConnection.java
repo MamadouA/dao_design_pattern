@@ -1,4 +1,4 @@
-package org.mnjaay.database;
+package org.mnjaay.db;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

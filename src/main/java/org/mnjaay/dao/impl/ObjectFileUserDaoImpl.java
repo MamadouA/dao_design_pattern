@@ -2,8 +2,8 @@ package org.mnjaay.dao.impl;
 
 import org.mnjaay.dao.IDao;
 import org.mnjaay.exceptions.DAOException;
-import org.mnjaay.model.User;
-import org.mnjaay.model.Users;
+import org.mnjaay.entities.User;
+import org.mnjaay.entities.Users;
 import org.mnjaay.utils.Serializer;
 import java.io.IOException;
 import java.util.List;

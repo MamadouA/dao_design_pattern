@@ -1,4 +1,4 @@
-package org.mnjaay.model;
+package org.mnjaay.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,30 +1,16 @@
 package org.mnjaay.runtime;
 
-import org.mnjaay.model.User;
+import org.mnjaay.entities.User;
 import org.mnjaay.testeur.Tester;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Tester hibernateTester = new Tester();
+        Tester tester = new Tester();
 
-//        hibernateTester.createUser("admin", "passer");
-//        jdbcTesteur.deleteUser(1);
-
-//        User user = jdbcTsteur.read(2);
-//
-//        // display and update
-//        if(user != null) {
-//            System.out.println("Login: " + user.getLogin()
-//                    + "\nPassword: " + user.getPassword() + "\n");
-//
-//            user.setPassword("passer@123");
-//
-//            jdbcTesteur.updateUser(user);
-//        }
-
-        displayUsers(hibernateTester.listUsers());
+        tester.createStudentWithClasseWithBulletin("Ndiaye", "Mnjaay",
+                "Master 1 ISI Jour", 12, 15);
     }
 
     public static void displayUsers(List<User> users) {

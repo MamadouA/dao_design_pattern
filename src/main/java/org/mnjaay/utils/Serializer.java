@@ -1,6 +1,6 @@
 package org.mnjaay.utils;
 
-import org.mnjaay.model.Users;
+import org.mnjaay.entities.Users;
 
 import java.io.*;
 
