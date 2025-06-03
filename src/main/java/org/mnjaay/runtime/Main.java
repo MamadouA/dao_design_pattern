@@ -9,8 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Tester tester = new Tester();
 
-        tester.createStudentWithClasseWithBulletin("Ndiaye", "Mnjaay",
-                "Master 1 ISI Jour", 12, 15);
+        tester.createTeacher("Gislain", "Ackinocho");
     }
 
     public static void displayUsers(List<User> users) {

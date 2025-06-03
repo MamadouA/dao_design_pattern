@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "t_enseignants")
 public class Enseignant extends Utilisateur{
@@ -23,5 +24,24 @@ public class Enseignant extends Utilisateur{
     public void addClasse(Classe classe) {
         classes.add(classe);
         classe.getEnseignats().add(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) {
+            return true;
+        }
+        if(obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Enseignant enseignant = (Enseignant) obj;
+
+        return Objects.equals(id, enseignant.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

@@ -1,15 +1,9 @@
 package org.mnjaay.testeur;
 
 import org.mnjaay.dao.IDao;
-import org.mnjaay.dao.impl.HibernateBulletinDaoImpl;
-import org.mnjaay.dao.impl.HibernateClasseDaoImpl;
-import org.mnjaay.dao.impl.HibernateEtudiantDaoImpl;
-import org.mnjaay.dao.impl.HibernateUserDaoImpl;
-import org.mnjaay.entities.Bulletin;
-import org.mnjaay.entities.Classe;
-import org.mnjaay.entities.Etudiant;
+import org.mnjaay.dao.impl.*;
+import org.mnjaay.entities.*;
 import org.mnjaay.exceptions.DAOException;
-import org.mnjaay.entities.User;
 
 import java.util.List;
 
@@ -18,12 +12,24 @@ public class Tester {
     IDao<Classe> classeDao;
     IDao<Etudiant> etudiantDao;
     IDao<Bulletin> bulletinDao;
+    IDao<Enseignant> enseignantDao;
 
     public Tester() {
         userDao = new HibernateUserDaoImpl();
         classeDao = new HibernateClasseDaoImpl();
         etudiantDao = new HibernateEtudiantDaoImpl();
         bulletinDao = new HibernateBulletinDaoImpl();
+        enseignantDao = new HibernateEnseignantDaoImp();
+    }
+
+    public void createTeacher(String nom, String prenom) {
+        try {
+            Enseignant enseignant = new Enseignant(nom, prenom);
+            enseignantDao.create(enseignant);
+            System.out.println("New teacher create successfully!");
+        } catch (DAOException e) {
+            System.out.println("Error while creating a new teacher: " + e.getMessage());
+        }
     }
 
     // - Users
