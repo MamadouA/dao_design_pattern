@@ -55,6 +55,7 @@ public class Bulletin {
     }
 
     public void setEtudiant(Etudiant etudiant) {
+        this.etudiant.setBulletin(this);
         this.etudiant = etudiant;
     }
 }

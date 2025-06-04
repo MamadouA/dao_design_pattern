@@ -2,14 +2,13 @@ package org.mnjaay.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.mnjaay.dao.IDao;
 import org.mnjaay.db.HibernateConnection;
 import org.mnjaay.entities.Bulletin;
 import org.mnjaay.exceptions.DAOException;
 
 import java.util.List;
 
-public class HibernateBulletinDaoImpl implements IDao<Bulletin> {
+public class HibernateBulletinDaoImpl extends HibernateObjectDaoImpl<Bulletin> {
 
     @Override
     public void create(Bulletin bulletin) throws DAOException {

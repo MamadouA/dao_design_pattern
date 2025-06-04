@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Tester tester = new Tester();
 
-        tester.createTeacher("Gislain", "Ackinocho");
+        tester.createTeacher("DER", "Moustapha");
     }
 
     public static void displayUsers(List<User> users) {

@@ -27,6 +27,7 @@ public class Etudiant extends Utilisateur{
     }
 
     public void setBulletin(Bulletin bulletin) {
+        this.bulletin.setEtudiant(this);
         this.bulletin = bulletin;
     }
 }

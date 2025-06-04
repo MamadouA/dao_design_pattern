@@ -2,14 +2,13 @@ package org.mnjaay.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.mnjaay.dao.IDao;
 import org.mnjaay.db.HibernateConnection;
 import org.mnjaay.entities.Classe;
 import org.mnjaay.exceptions.DAOException;
 
 import java.util.List;
 
-public class HibernateClasseDaoImpl implements IDao<Classe> {
+public class HibernateClasseDaoImpl extends HibernateObjectDaoImpl<Classe> {
 
     @Override
     public void create(Classe classe) throws DAOException {
