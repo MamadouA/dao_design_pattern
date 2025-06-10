@@ -15,6 +15,12 @@ public class Note {
     @JoinColumn(name = "releve_id")
     private Releve releve;
 
+    public Note(double value, String commentaire, Releve releve) {
+        setValue(value);
+        setCommentaire(commentaire);
+        setReleve(releve);
+    }
+
     public int getId() {
         return id;
     }

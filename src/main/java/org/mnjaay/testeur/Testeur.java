@@ -4,22 +4,60 @@ import org.mnjaay.dao.IDao;
 import org.mnjaay.dao.impl.*;
 import org.mnjaay.entities.*;
 import org.mnjaay.exceptions.DAOException;
+import org.mnjaay.factory.*;
 
-import java.util.List;
-
-public class Tester {
-    IDao<User> userDao;
+public class Testeur {
     IDao<Classe> classeDao;
     IDao<Etudiant> etudiantDao;
     IDao<Bulletin> bulletinDao;
     IDao<Enseignant> enseignantDao;
+    IDao<Releve> releveDao;
+    IDao<Note> noteDao;
 
-    public Tester() {
-        userDao = new HibernateUserDaoImpl();
-        classeDao = new HibernateClasseDaoImpl();
-        etudiantDao = new HibernateEtudiantDaoImpl();
-        bulletinDao = new HibernateBulletinDaoImpl();
-        enseignantDao = new HibernateEnseignantDaoImp();
+    public Testeur() {
+        classeDao = ConcreteFactory
+                        .getFactory(ClasseFactory.class)
+                        .getClasseDaoImpl(HibernateClasseDaoImpl.class);
+
+        etudiantDao = ConcreteFactory
+                        .getFactory(EtudiantFactory.class)
+                        .getEtudiantDaoImpl(HibernateEtudiantDaoImpl.class);
+
+        bulletinDao = ConcreteFactory
+                        .getFactory(BulletinFactory.class)
+                        .getBulletinDaoImpl(HibernateBulletinDaoImpl.class);
+
+        releveDao = ConcreteFactory
+                    .getFactory(ReleveFactory.class)
+                    .getReleveDaoImpl(HibernateReleveDaoImpl.class);
+
+        noteDao = ConcreteFactory
+                .getFactory(NoteFactory.class)
+                .getNoteDaoImpl(HibernateNoteDaoImpl.class);
+    }
+
+        // Teste création et suppresion en cascade
+    // ------------------------------------------
+    public void creerEtudiant(Etudiant etudiant) {
+        try {
+            etudiantDao.create(etudiant);
+        } catch (DAOException e) {
+            System.out.println("Error when creating a new student: " + e.getMessage());
+        }
+    }
+
+
+
+
+    // ------------------------------------------
+
+    public void createStudentWithBulletin() {
+        Etudiant etudiant = new Etudiant("Doe", "John");
+
+        Bulletin bulletin = new Bulletin(5, 15, etudiant);
+
+        Releve releve = new Releve(bulletin, 10);
+
     }
 
     public void createTeacher(String nom, String prenom) {
@@ -32,64 +70,6 @@ public class Tester {
         }
     }
 
-    // - Users
-    public void createUser(String login, String password) {
-        User user = new User(login, password);
-
-        try {
-            userDao.create(user);
-            System.out.println("User created successfully !");
-        }
-        catch (DAOException e) {
-            System.out.println("An error occured: " + e.getMessage());
-        }
-    }
-
-    public User read(int id) {
-        try {
-            User user = userDao.read(id);
-            System.out.println("User retrieved successfully !");
-            return user;
-        }
-        catch (DAOException e) {
-            System.out.println("An error occured: " + e.getMessage());
-        }
-
-        return null;
-    }
-
-    public void deleteUser(int id) {
-        try {
-            userDao.delete(id);
-            System.out.println("User deleted successfully !");
-        }
-        catch (DAOException e) {
-            System.out.println("An error occured: " + e.getMessage());
-        }
-    }
-
-    public void updateUser(User user) {
-        try {
-            userDao.update(user);
-            System.out.println("User updated successfully !");
-        }
-        catch (DAOException e) {
-            System.out.println("An error occured: " + e.getMessage());
-        }
-    }
-
-    public List<User> listUsers() {
-        try {
-            List<User> users = userDao.list();
-            System.out.println("Users retrieved successfully !");
-            return users;
-        }
-        catch (DAOException e) {
-            System.out.println("An error occured: " + e.getMessage());
-        }
-
-        return null;
-    }
 
     public void createStudentWithClasse (String nom, String prenom, String libelleClasse) {
         Classe classe = createClasse(libelleClasse);

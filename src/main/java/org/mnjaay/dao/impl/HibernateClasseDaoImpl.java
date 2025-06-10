@@ -10,6 +10,10 @@ import java.util.List;
 
 public class HibernateClasseDaoImpl extends HibernateObjectDaoImpl<Classe> {
 
+    public HibernateClasseDaoImpl() {
+        super(Classe.class);
+    }
+
     @Override
     public void create(Classe classe) throws DAOException {
         try {

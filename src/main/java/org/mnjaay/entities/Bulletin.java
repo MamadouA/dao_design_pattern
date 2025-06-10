@@ -1,6 +1,10 @@
 package org.mnjaay.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "t_bulletins")
 public class Bulletin {
@@ -11,9 +15,16 @@ public class Bulletin {
     private int rang;
     private double moyenne;
 
-    @OneToOne
+    @OneToOne(mappedBy = "bulletin")
     @JoinColumn(name = "etudiant_id")
     private Etudiant etudiant;
+
+    @OneToMany(mappedBy = "bulletin", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+    List<Releve> releves = new ArrayList<>();
+
+    public void addReleve(Releve releve) {
+        this.releves.add(releve);
+    }
 
     public Bulletin(int rang, double moyenne) {
         this.rang = rang;
@@ -55,7 +66,6 @@ public class Bulletin {
     }
 
     public void setEtudiant(Etudiant etudiant) {
-        this.etudiant.setBulletin(this);
         this.etudiant = etudiant;
     }
 }

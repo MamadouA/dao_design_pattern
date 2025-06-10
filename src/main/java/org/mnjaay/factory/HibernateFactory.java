@@ -3,7 +3,7 @@ package org.mnjaay.factory;
 import org.mnjaay.dao.impl.*;
 
 public class HibernateFactory {
-    public Object getObjectHibernateImp(Object typeHibernateDao) {
+    public static Object getObjectHibernateImp(Object typeHibernateDao) {
        if(typeHibernateDao == HibernateEtudiantDaoImpl.class)
            return new HibernateEtudiantDaoImpl();
 

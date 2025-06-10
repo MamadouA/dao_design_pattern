@@ -24,6 +24,10 @@ public class Classe {
         this.libelle = libelle;
     }
 
+    public void addEtudiant(Etudiant etudiant) {
+        this.etudiants.add(etudiant);
+    }
+
     public List<Enseignant> getEnseignats() {
         return enseignants;
     }

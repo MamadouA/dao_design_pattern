@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity(name = "t_etudiants")
 public class Etudiant extends Utilisateur{
 
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne( cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     @JoinColumn(name = "bulletin_id")
     private Bulletin bulletin;
 
@@ -19,15 +19,21 @@ public class Etudiant extends Utilisateur{
 
     public Etudiant(String nom, String prenom, Classe classe) {
         super(nom, prenom);
-        this.classe = classe;
+        setClasse(classe);
+    }
+
+    public Etudiant(String nom, String prenom, Bulletin bulletin) {
+        super(nom, prenom);
+        setBulletin(bulletin);
     }
 
     public void setClasse(Classe classe) {
+        classe.addEtudiant(this);
         this.classe = classe;
     }
 
     public void setBulletin(Bulletin bulletin) {
-        this.bulletin.setEtudiant(this);
         this.bulletin = bulletin;
+        this.bulletin.setEtudiant(this);
     }
 }
