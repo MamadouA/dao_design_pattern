@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "t_enseignants")
+@Entity(name = "enseignant")
 public class Enseignant extends Utilisateur{
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

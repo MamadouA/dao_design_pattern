@@ -1,7 +1,6 @@
 package org.mnjaay.entities;
 
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,12 +19,20 @@ public class Classe {
     @ManyToMany(mappedBy = "classes")
     private List<Enseignant> enseignants = new ArrayList<>();
 
+    public Classe() {}
+
     public Classe(String libelle) {
         this.libelle = libelle;
     }
 
     public void addEtudiant(Etudiant etudiant) {
         this.etudiants.add(etudiant);
+    }
+
+    public void removeEtudiants() {
+        for(Etudiant etudiant : etudiants) {
+            etudiant.setClasse(null);
+        }
     }
 
     public List<Enseignant> getEnseignats() {
@@ -42,7 +49,6 @@ public class Classe {
         }
 
         Classe classe = (Classe) obj;
-
         return Objects.equals(id, classe.id);
     }
 

@@ -17,12 +17,14 @@ public class Releve {
     @JoinColumn(name = "bulletin_id")
     private Bulletin bulletin;
 
-    @OneToMany(mappedBy = "releve", cascade = { CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "releve", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     List<Note> notes = new ArrayList<>();
 
     public void addNote(Note note) {
         this.notes.add(note);
     }
+
+    public Releve() {}
 
     public Releve(Bulletin bulletin, double moyenne) {
         this.bulletin = bulletin;

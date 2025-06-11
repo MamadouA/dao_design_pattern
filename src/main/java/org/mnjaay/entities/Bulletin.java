@@ -1,8 +1,6 @@
 package org.mnjaay.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +23,8 @@ public class Bulletin {
     public void addReleve(Releve releve) {
         this.releves.add(releve);
     }
+
+    public Bulletin() {}
 
     public Bulletin(int rang, double moyenne) {
         this.rang = rang;

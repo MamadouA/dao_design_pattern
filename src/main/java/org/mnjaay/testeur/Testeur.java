@@ -37,19 +37,62 @@ public class Testeur {
     }
 
         // Teste création et suppresion en cascade
-    // ------------------------------------------
+    // ----------------------------------------------------------------
     public void creerEtudiant(Etudiant etudiant) {
         try {
             etudiantDao.create(etudiant);
         } catch (DAOException e) {
-            System.out.println("Error when creating a new student: " + e.getMessage());
+            System.err.println("Error while creating a new student: " + e.getMessage());
         }
     }
 
+    public void supprimerEtudiant(int id) {
+        try {
+            etudiantDao.delete(id);
+        } catch (DAOException e) {
+            System.err.println("Error while deleting a student: " + e.getMessage());
+        }
+    }
 
+    public void supprimerClasse(int id) {
+        try {
+            Classe classe = classeDao.read(id);
+            classe.removeEtudiants();
+            classeDao.delete(id);
+        } catch (DAOException e) {
+            System.err.println("Error while deleting a classe: " + e.getMessage());
+        }
+    }
 
+    public void supprimerEtudiantEtSonBulletin() {
+        // - Classe
+        Classe classe = new Classe("LPTI3 ASR");
 
-    // ------------------------------------------
+        // - Bulletin
+        Bulletin bulletin = new Bulletin(15, 16.0);
+
+        // - Releve
+        Releve releveSemestre1 = new Releve(bulletin, 12);
+
+        // - Notes du Semestre 1
+        releveSemestre1.addNote(new Note(10.0, "Passable", releveSemestre1));
+        releveSemestre1.addNote(new Note(5.0, "Médiocre", releveSemestre1));
+        releveSemestre1.addNote(new Note(14.0, "Bien", releveSemestre1));
+
+        // - Notes du Semestre 2
+        Releve releveSemestre2 = new Releve(bulletin, 13);
+        releveSemestre2.addNote(new Note(18, "Trés bien", releveSemestre2));
+        releveSemestre2.addNote(new Note(11, "Bien", releveSemestre2));
+
+        bulletin.addReleve(releveSemestre1);
+        bulletin.addReleve(releveSemestre2);
+
+        Etudiant etudiant = new Etudiant("Doe", "Toto", classe, bulletin);
+
+        supprimerEtudiant(1);
+    }
+
+    // ----------------------------------------------------------------
 
     public void createStudentWithBulletin() {
         Etudiant etudiant = new Etudiant("Doe", "John");
@@ -66,7 +109,7 @@ public class Testeur {
             enseignantDao.create(enseignant);
             System.out.println("New teacher create successfully!");
         } catch (DAOException e) {
-            System.out.println("Error while creating a new teacher: " + e.getMessage());
+            System.err.println("Error while creating a new teacher: " + e.getMessage());
         }
     }
 
