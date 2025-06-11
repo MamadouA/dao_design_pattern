@@ -2,14 +2,14 @@ package org.mnjaay.entities;
 
 import jakarta.persistence.*;
 
-@Entity(name = "etudiant")
+@Entity(name = "t_etudiants")
 public class Etudiant extends Utilisateur{
 
     @OneToOne( cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     @JoinColumn(name = "bulletin_id")
     private Bulletin bulletin;
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+    @ManyToOne(cascade = { CascadeType.PERSIST })
     @JoinColumn(name = "classe_id")
     private Classe classe = null;
 

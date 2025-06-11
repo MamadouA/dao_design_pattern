@@ -41,7 +41,8 @@ public abstract class HibernateObjectDaoImpl <T> implements IDao<T> {
     public List<T> list() throws DAOException {
         try {
             Session session = HibernateConnection.getInstance().getSession();
-            return session.createQuery("select u " + " from t_entitys u", typeObject).getResultList();
+            String tableName = "t_" + typeObject.getSimpleName().toLowerCase() + "s";
+            return session.createQuery("select t " + " from " + tableName + " t", typeObject).getResultList();
         } catch (Exception e) {
             throw new DAOException("ERROR : " + e.getClass() + ":" + e.getMessage());
         }

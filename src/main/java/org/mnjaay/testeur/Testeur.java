@@ -6,6 +6,8 @@ import org.mnjaay.entities.*;
 import org.mnjaay.exceptions.DAOException;
 import org.mnjaay.factory.*;
 
+import java.util.List;
+
 public class Testeur {
     IDao<Classe> classeDao;
     IDao<Etudiant> etudiantDao;
@@ -38,9 +40,33 @@ public class Testeur {
 
         // Teste création et suppresion en cascade
     // ----------------------------------------------------------------
-    public void creerEtudiant(Etudiant etudiant) {
+    public void creerEtudiant() {
         try {
+            // - Classe
+            Classe classe = new Classe("LPTI3 ASR");
+
+            // - Bulletin
+            Bulletin bulletin = new Bulletin(15, 16.0);
+
+            // - Releve
+            Releve releveSemestre1 = new Releve(bulletin, 12);
+
+            // - Notes du Semestre 1
+            releveSemestre1.addNote(new Note(10.0, "Passable", releveSemestre1));
+            releveSemestre1.addNote(new Note(5.0, "Médiocre", releveSemestre1));
+            releveSemestre1.addNote(new Note(14.0, "Bien", releveSemestre1));
+
+            // - Notes du Semestre 2
+            Releve releveSemestre2 = new Releve(bulletin, 13);
+            releveSemestre2.addNote(new Note(18, "Trés bien", releveSemestre2));
+            releveSemestre2.addNote(new Note(11, "Bien", releveSemestre2));
+
+            bulletin.addReleve(releveSemestre1);
+            bulletin.addReleve(releveSemestre2);
+
+            Etudiant etudiant = new Etudiant("Doe", "Toto", classe, bulletin);
             etudiantDao.create(etudiant);
+            System.out.println("New student created successfully!");
         } catch (DAOException e) {
             System.err.println("Error while creating a new student: " + e.getMessage());
         }
@@ -64,34 +90,14 @@ public class Testeur {
         }
     }
 
-    public void supprimerEtudiantEtSonBulletin() {
-        // - Classe
-        Classe classe = new Classe("LPTI3 ASR");
-
-        // - Bulletin
-        Bulletin bulletin = new Bulletin(15, 16.0);
-
-        // - Releve
-        Releve releveSemestre1 = new Releve(bulletin, 12);
-
-        // - Notes du Semestre 1
-        releveSemestre1.addNote(new Note(10.0, "Passable", releveSemestre1));
-        releveSemestre1.addNote(new Note(5.0, "Médiocre", releveSemestre1));
-        releveSemestre1.addNote(new Note(14.0, "Bien", releveSemestre1));
-
-        // - Notes du Semestre 2
-        Releve releveSemestre2 = new Releve(bulletin, 13);
-        releveSemestre2.addNote(new Note(18, "Trés bien", releveSemestre2));
-        releveSemestre2.addNote(new Note(11, "Bien", releveSemestre2));
-
-        bulletin.addReleve(releveSemestre1);
-        bulletin.addReleve(releveSemestre2);
-
-        Etudiant etudiant = new Etudiant("Doe", "Toto", classe, bulletin);
-
-        supprimerEtudiant(1);
+    public List<Etudiant> listerEtudiant() {
+        try {
+            return etudiantDao.list();
+        } catch (DAOException e) {
+            System.err.println("Error while retrieving the student: " + e.getMessage());
+        }
+        return null;
     }
-
     // ----------------------------------------------------------------
 
     public void createStudentWithBulletin() {
